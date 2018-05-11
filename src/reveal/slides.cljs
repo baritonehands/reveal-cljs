@@ -1,6 +1,5 @@
 (ns reveal.slides
-  (:require [reveal.klipse :refer [create-iframe]]
-            [clojure.string :as s]))
+  (:require [clojure.string :as s]))
 
 (def slide-1
   [:section

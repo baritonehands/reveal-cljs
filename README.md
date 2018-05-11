@@ -38,14 +38,14 @@ Download the dependency reveal.js (specified in `package.json`) with:
 
 To get an interactive development environment run:
 
-    shadow-cljs watch reveal
+    shadow-cljs clj-run build/watch
 
 and open your browser at [localhost:8080](http://localhost:8080/).
 This will auto compile and send all changes to the browser without the need to reload.
 
 To make a release version (for Github Pages):
 
-    shadow-cljs release reveal
+    shadow-cljs clj-run build/release
 
 Then open index.html to see the prebuilt version.
 

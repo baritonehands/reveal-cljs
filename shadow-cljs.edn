@@ -1,5 +1,7 @@
 {:source-paths ["src"]
  :dependencies [[org.clojure/clojurescript "1.10.238"]
+                [thheller/shadow-cljs "2.3.21"]
+                [me.raynes/fs "1.4.6"]
                 [hiccups "0.3.0"]
                 [cider/cider-nrepl "0.15.1"]
                 [proto-repl "0.3.1"]
