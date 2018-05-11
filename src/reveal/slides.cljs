@@ -25,7 +25,7 @@
    [:h2 "Live Code Editing"]
    [:p "You can define snippets for live editing"]
    [:klipse-snippet {:data-language "clojure"
-                     :data-height   500}
+                     :data-height   300}
     (s/join "\n"
       ["(defn sum [xs]"
        "   (reduce + xs))"
