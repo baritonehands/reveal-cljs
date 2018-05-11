@@ -3,7 +3,8 @@
   (:require [clojure.string :refer [join]]
             [goog.dom :as gdom]
             [hiccups.runtime :as hiccupsrt]
-            [reveal.slides :as slides]))
+            [reveal.slides :as slides]
+            [reveal.klipse :refer [klipsify-all]]))
 
 
 ;; When changing comments, you manually need to refresh your browser
@@ -26,8 +27,10 @@
   []
   (set! (.. (.getElementById js/document "slides") -innerHTML) (convert))
   (.initialize js/Reveal options)
-  (.setState js/Reveal (.getState js/Reveal)))
-(main)
+  (.setState js/Reveal (.getState js/Reveal))
+  (klipsify-all))
 
-(defn on-js-reload []
+(defn ^:dev/after-load on-js-reload []
   (main))
+
+(main)

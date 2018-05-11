@@ -1,0 +1,16 @@
+{:source-paths ["src"]
+ :dependencies [[org.clojure/clojurescript "1.10.238"]
+                [hiccups "0.3.0"]
+                [cider/cider-nrepl "0.15.1"]
+                [proto-repl "0.3.1"]
+                [com.cemerick/piggieback "0.2.2"]]
+ :nrepl {:port 7888
+         :middleware [cemerick.piggieback/wrap-cljs-repl]}
+ :http-root "."
+ :builds {:reveal {:target :browser
+                   :output-dir "js"
+                   :asset-path "js"
+                   :modules {:main {:entries [reveal.core]}}
+                   :devtools {:after-load app.main/reload!
+                              :http-root "."
+                              :http-port 8080}}}}

@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "shadow-cljs": "^2.3.21"
+  },
+  "dependencies": {
+    "reveal.js": "^3.6.0"
+  }
+}

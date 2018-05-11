@@ -13,9 +13,9 @@ hotcode-support in ClojureScript.
 
 ## Requirements
 
-All common JDKs should work. I used a workaround [from this
-issue](https://github.com/bhauman/lein-figwheel/issues/612) to make it
-compatible to JDK9 until Clojure and ClojureScript are fully JDK9-compatible.
+This project is built using [shadow-cljs](http://shadow-cljs.org/). You also need a JDK installed.
+
+    npm install -g shadow-cljs
 
 ## Usage
 
@@ -26,34 +26,31 @@ More options can be found
 
 Create your slides in
 [slides.cljs](https://github.com/n2o/reveal-cljs/blob/master/src/reveal/slides.cljs)
-and add them to the list in the function `all`.
+and add them to the list in the function `all`. Code snippets will be rendered using [klipse](https://github.com/viebel/klipse) (see slide-3).
 
 Then start the development server as seen in the Setup section.
 
 ## Installation & Setup
 
-Download the dependency reveal.js (specified in `bower.json`) with:
+Download the dependency reveal.js (specified in `package.json`) with:
 
-    bower install
-    
-or clone the repository:
-
-    git clone git@github.com:hakimel/reveal.js.git resources/public/bower_components/reveal.js
+    npm install
 
 To get an interactive development environment run:
 
-    lein figwheel
+    shadow-cljs watch reveal
 
-and open your browser at [localhost:3449](http://localhost:3449/).
-This will auto compile and send all changes to the browser without the
-need to reload. 
+and open your browser at [localhost:8080](http://localhost:8080/).
+This will auto compile and send all changes to the browser without the need to reload.
 
-To clean all compiled files:
+To make a release version (for Github Pages):
 
-    lein clean
+    shadow-cljs release reveal
+
+Then open index.html to see the prebuilt version.
 
 ## License
 
-Copyright © 2016-2017 Christian Meter
+Copyright © 2018 Brian Gregg
 
 Distributed under the [MIT](LICENSE) License version.
