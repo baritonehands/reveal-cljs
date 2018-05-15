@@ -5,6 +5,7 @@
 (defn copy-reveal []
   (fs/copy-dir "node_modules/reveal.js/css" ".")
   (fs/copy-dir "node_modules/reveal.js/lib" ".")
+  (fs/copy-dir "node_modules/reveal.js/plugin" ".")
   (fs/copy "node_modules/reveal.js/js/reveal.js" "js/reveal.js"))
 
 (defn watch

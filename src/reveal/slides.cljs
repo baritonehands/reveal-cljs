@@ -21,19 +21,22 @@
 
 (def slide-3
   [:section
-   [:h2 "Live Code Editing"]
-   [:p "You can define snippets for live editing"]
+   [:h2 "Highlighted Code Snippets"]
+   [:p "You can dump files in snippets/ to use as highlighted code samples"]
+   [:pre#sum]])
+
+(def slide-4
+  [:section
+   [:h2 "Live Code Snippets"]
+   [:p "You can also create snippets for live editing"]
    [:klipse-snippet {:data-language "clojure"
-                     :data-height   300}
-    (s/join "\n"
-      ["(defn sum [xs]"
-       "   (reduce + xs))"
-       ""
-       "(sum (range 0 100))"])]])
+                     :data-height   300
+                     :data-src      "live"}]])
 
 (defn all
   "Add here all slides you want to see in your presentation."
   []
   [slide-1
    slide-2
-   slide-3])
+   slide-3
+   slide-4])

@@ -4,15 +4,17 @@
             [goog.dom :as gdom]
             [hiccups.runtime :as hiccupsrt]
             [reveal.slides :as slides]
-            [reveal.klipse :refer [klipsify-all]]))
-
+            [reveal.klipse :refer [klipsify-all]]
+            [reveal.snippets :refer [render-all]] :reload))
 
 ;; When changing comments, you manually need to refresh your browser
 (def options #js {:controls    true
                   :progress    true
                   :transition  "fade"                    ; e.g. none/fade/slide/convex/concave/zoom
-                  :slideNumber false})
-
+                  :slideNumber false
+                  :dependencies #js [#js {:src "plugin/highlight/highlight.js"
+                                          :async true
+                                          :callback #(.initHighlightingOnLoad js/hljs)}]})
 
 ;;;; You do not need to change anything below this comment
 
@@ -28,7 +30,8 @@
   (set! (.. (.getElementById js/document "slides") -innerHTML) (convert))
   (.initialize js/Reveal options)
   (.setState js/Reveal (.getState js/Reveal))
-  (klipsify-all))
+  (klipsify-all)
+  (render-all))
 
 (defn ^:dev/after-load on-js-reload []
   (main))

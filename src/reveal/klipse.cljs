@@ -1,6 +1,7 @@
 (ns reveal.klipse
   (:require-macros [hiccups.core :as hiccups :refer [html]])
-  (:require [clojure.string :as s]))
+  (:require [clojure.string :as s]
+            [reveal.snippets :as snippets] :reload))
 
 (def lang->selector
   {"clojure" "selector",
@@ -20,8 +21,12 @@
      [:pre
       [:code.klipse src]]
      [:link {:rel "stylesheet" :type "text/css" :href "https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"}]
+     [:link {:rel "stylesheet" :type "text/css" :href "https://codemirror.net/theme/zenburn.css"}]
+     [:style ".CodeMirror { font-size: 24px; }"]
      [:script (s/join "\n" ["window.klipse_settings = {"
-                            (str selector ": '.klipse'")
+                            (str selector ": '.klipse',")
+                            "codemirror_options_in: { theme: 'zenburn' },"
+                            "codemirror_options_out: { theme: 'zenburn' }"
                             "}"])]
      [:script {:src (js-src lang)}]]))
 
@@ -32,11 +37,14 @@
             :srcdoc (html (iframe-src lang src))}])
 
 (defn klipsify [elem]
-  (let [lang (-> elem .-dataset .-language)
-        height (int (or (-> elem .-dataset .-height) "400"))]
-    (aset elem "innerHTML" (html (create-iframe lang (.-innerHTML elem) height)))))
+  (let [data (js->clj (.-dataset elem))
+        height (int (or (.-height data) "400"))
+        lang (.-language data)
+        src (.-src data)]
+    (if src
+      (aset elem "innerHTML" (html (create-iframe lang (get snippets/preloaded src) height)))
+      (aset elem "innerHTML" (html (create-iframe lang (.-innerHTML elem) height))))))
 
 (defn klipsify-all []
   (doseq [x (array-seq (.querySelectorAll js/document "klipse-snippet"))]
-    (println x)
     (klipsify x)))
